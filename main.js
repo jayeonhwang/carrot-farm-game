@@ -44,6 +44,7 @@ function startGame() {
   showStopBtn();
   showTimerAndScore();
   startGameTimer();
+  playSound(bgSound);
 }
 
 function stopGame() {
@@ -51,23 +52,35 @@ function stopGame() {
   stopGameTimer();
   hideGameButton();
   showPopUpWithText('REPLAY❓');
+  stopSound(bgSound);
+  playSound(alertSound);
 }
 
 function finishGame(win) {
   started = false;
+  if (win) {
+    playSound(winSound);
+  } else {
+    playSound(bugSound);
+  }
+  stopSound(bgSound);
   hideGameButton();
   stopGameTimer();
   showPopUpWithText(win ? 'YOU WIN 🎉' : 'YOU LOST 😭');
+
 }
 
 function showStopBtn() {
   const icon = gameBtn.querySelector('.fa-solid');
   icon.classList.add('fa-stop');
   icon.classList.remove('fa-play');
+  gameBtn.style.visibility = 'visible';
 }
+
 
 function hideGameButton() {
   gameBtn.style.visibility = 'hidden';
+
 }
 
 function showTimerAndScore() {
@@ -125,15 +138,25 @@ function onFieldClick(event) {
   if (target.matches('.carrot')) {
     target.remove();
     score++;
+    playSound(carrotSound);
     updateScoreBoard();
     if (score === CARROT_COUNT) {
       finishGame(true);
     }
   } else if (target.matches('.bug')) {
+    playSound(bugSound);
     finishGame(false);
   }
 }
 
+function playSound(sound) {
+  sound.currentTime = 0;
+  sound.play();
+}
+
+function stopSound(sound) {
+  sound.pause();
+}
 
 function updateScoreBoard() {
   gameScore.innerText = CARROT_COUNT - score;
