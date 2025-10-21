@@ -1,9 +1,9 @@
 
 'use strict';
 const CARROT_SIZE = 80;
-const CARROT_COUNT = 5;
+const CARROT_COUNT = 10;
 const BUG_COUNT = 5;
-const GAME_DURATION_SEC = 5;
+const GAME_DURATION_SEC = 60;
 
 const field = document.querySelector(".game__field");
 const fieldRect = field.getBoundingClientRect();
@@ -67,7 +67,6 @@ function finishGame(win) {
   hideGameButton();
   stopGameTimer();
   showPopUpWithText(win ? 'YOU WIN 🎉' : 'YOU LOST 😭');
-
 }
 
 function showStopBtn() {
@@ -144,7 +143,6 @@ function onFieldClick(event) {
       finishGame(true);
     }
   } else if (target.matches('.bug')) {
-    playSound(bugSound);
     finishGame(false);
   }
 }
