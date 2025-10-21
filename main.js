@@ -10,6 +10,8 @@ const fieldRect = field.getBoundingClientRect();
 const gameBtn = document.querySelector(".game__button");
 const gameScore = document.querySelector(".game__score");
 const gameTimer = document.querySelector(".game__timer");
+const gamePopUp = document.querySelector(".pop-up");
+const popUpText = document.querySelector(".pop-up__message");
 
 let started = false;
 let score = 0;
@@ -24,6 +26,7 @@ gameBtn.addEventListener('click', () => {
   started = !started;
 });
 
+
 function startGame() {
   initGame();
   showStopBtn();
@@ -32,8 +35,23 @@ function startGame() {
 }
 
 function stopGame() {
+  stopGameTimer();
+  hideGameButton();
+  showPopUpWithText('REPLAY❓');
+}
 
-};
+function hideGameButton() {
+  gameBtn.style.visibility = 'hidden';
+}
+
+function showPopUpWithText(text) {
+  gamePopUp.classList.remove('pop-up--hide');
+  popUpText.innerText = text;
+}
+
+function stopGameTimer() {
+  clearInterval(timer);
+}
 
 function showStopBtn() {
   const icon = gameBtn.querySelector('.fa-play');
