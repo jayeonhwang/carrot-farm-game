@@ -34,7 +34,7 @@ export default class Field {
     }
   }
 
-  onClick(event) {
+  onClick = (event) => {
     const target = event.target;
     if (target.matches('.carrot')) {
       target.remove();
