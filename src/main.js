@@ -1,15 +1,20 @@
 
 'use strict';
 import PopUp from "./popup.js";
-import Game from "./game.js";
+import GameBuilder from "./game.js";
 
 
 const gameFinishBanner = new PopUp();
+const game = new GameBuilder()
+  .withGameDuration(5)
+  .withCarrotCount(5)
+  .withBugCount(5)
+  .build();
+
 gameFinishBanner.setClickListener(() => {
   game.start();
 });
 
-const game = new Game(5, 5, 5);
 
 game.setGameStopListener(reason => {
   let message;
@@ -26,7 +31,6 @@ game.setGameStopListener(reason => {
     default:
       throw new Error('not valid reason');
   }
-
   gameFinishBanner.showWithText(message);
 });
 
