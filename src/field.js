@@ -41,9 +41,31 @@ export class Field {
       const y = randomNumber(y1, y2);
       item.style.left = `${x}px`;
       item.style.top = `${y}px`;
+
+      if (className === ItemType.bug) {
+        this._applyRandomBugMotion(item);
+      }
+
       this.field.appendChild(item);
     }
   }
+
+  _applyRandomBugMotion(bug) {
+    const range = 30;
+    bug.style.setProperty('--x1', `${randomNumber(-range, range)}px`);
+    bug.style.setProperty('--y1', `${randomNumber(-range, range)}px`);
+    bug.style.setProperty('--x2', `${randomNumber(-range, range)}px`);
+    bug.style.setProperty('--y2', `${randomNumber(-range, range)}px`);
+    bug.style.setProperty('--x3', `${randomNumber(-range, range)}px`);
+    bug.style.setProperty('--y3', `${randomNumber(-range, range)}px`);
+
+    const duration = randomNumber(0.8, 2.5);
+    bug.style.animationDuration = `${duration}s`;
+
+    const delay = randomNumber(0, 1.5);
+    bug.style.animationDelay = `${delay}s`;
+  }
+
 
   onClick = (event) => {
     const target = event.target;
@@ -61,6 +83,7 @@ export class Field {
   setClickListener(onItemClick) {
     this.onItemClick = onItemClick;
   }
+
 }
 
 function randomNumber(min, max) {

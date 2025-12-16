@@ -135,3 +135,56 @@ button {
 .bug:hover {
   transform: scale(1.1);
 }
+
+@keyframes bugMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(var(--x1), var(--y1));
+  }
+  50% {
+    transform: translate(var(--x2), var(--y3));
+  }
+  75% {
+    transform: translate(var(--x3), var(--y3));
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.bug {
+  animation: bugMove 1.5s infinite alternate ease-in-out;
+}
+
+.level-effect {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  font-size: 4rem;
+  font-weight: bold;
+  color: magenta;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.level-effect.show {
+  animation: levelUp 1.2s ease-out forwards;
+}
+
+@keyframes levelUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  40% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}

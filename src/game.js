@@ -38,10 +38,9 @@ class Game {
     this.gameDuration = gameDuration;
     this.baseCarrotCount = carrotCount;
     this.baseBugCount = bugCount;
-
     this.carrotCount = carrotCount;
     this.bugCount = bugCount;
-
+    this.levelEffect = document.querySelector('.level-effect');
 
     this.gameScore = document.querySelector(".game__score");
     this.gameTimer = document.querySelector(".game__timer");
@@ -114,7 +113,12 @@ class Game {
     this.level++;
     this.carrotCount = (this.level) * 5;
     this.bugCount = (this.level) * 5;
+    this.gameDuration = this.gameDuration + 3;
     this.updateLevelText();
+
+
+    this.showLevelEffect();
+
     this.gameField.updateItems(this.carrotCount, this.bugCount);
   }
 
@@ -169,6 +173,13 @@ class Game {
 
   updateScoreBoard() {
     this.gameScore.innerText = this.carrotCount - this.score;
+  }
+
+  showLevelEffect() {
+    this.levelEffect.classList.add('show');
+    setTimeout(() => {
+      this.levelEffect.classList.remove('show');
+    }, 1200);
   }
 
 }
