@@ -34,13 +34,20 @@ export class GameBuilder {
 
 class Game {
   constructor(gameDuration, carrotCount, bugCount) {
+    this.level = 1;
     this.gameDuration = gameDuration;
+    this.baseCarrotCount = carrotCount;
+    this.baseBugCount = bugCount;
+
     this.carrotCount = carrotCount;
     this.bugCount = bugCount;
+
 
     this.gameScore = document.querySelector(".game__score");
     this.gameTimer = document.querySelector(".game__timer");
     this.gameBtn = document.querySelector(".game__button");
+    this.gameLevel = document.querySelector(".game__level");
+    this.updateLevelText();
 
     this.gameBtn.addEventListener('click', () => {
       if (this.started) {
@@ -78,6 +85,10 @@ class Game {
     this.gameTimer.innerText = `${minutes}:${seconds}`;
   }
 
+  updateLevelText() {
+    this.gameLevel.innerText = `Level: ${this.level}`;
+  }
+
   setGameStopListener(onGameStop) {
     this.onGameStop = onGameStop;
   }
@@ -99,6 +110,23 @@ class Game {
     this.onGameStop && this.onGameStop(reason);
   }
 
+  nextLevel() {
+    this.level++;
+    this.carrotCount = (this.level) * 5;
+    this.bugCount = (this.level) * 5;
+    this.updateLevelText();
+    this.gameField.updateItems(this.carrotCount, this.bugCount);
+  }
+
+  resetGame() {
+    this.level = 1;
+    this.carrotCount = this.baseCarrotCount;
+    this.bugCount = this.baseBugCount;
+    this.updateLevelText();
+    this.gameField.updateItems(this.carrotCount, this.bugCount);
+
+  }
+
   initGame() {
     this.score = 0;
     this.gameScore.innerText = this.carrotCount - this.score;
@@ -111,7 +139,6 @@ class Game {
     icon.classList.remove('fa-play');
     this.gameBtn.style.visibility = 'visible';
   }
-
 
   hideGameButton() {
     this.gameBtn.style.visibility = 'hidden';

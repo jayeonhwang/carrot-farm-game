@@ -22,6 +22,11 @@ export class Field {
     this._addItem(ItemType.bug, this.bugCount, 'img/bug.png');
   }
 
+  updateItems(carrotCount, bugCount) {
+    this.carrotCount = carrotCount;
+    this.bugCount = bugCount;
+  }
+
   _addItem(className, count, imgPath) {
     const x1 = 0;
     const y1 = 0;

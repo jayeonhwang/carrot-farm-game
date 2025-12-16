@@ -41,13 +41,11 @@ export default class PopUp {
       case Reason.lose:
         this.popUpText.textContent = 'YOU LOSE 😭';
         this.popUpRefresh.classList.remove('pop-up-btn--hide');
-        this.popUpRefresh.onclick = () => this.onRetry();
         break;
 
       case Reason.cancel:
         this.popUpText.textContent = 'Replay ❓';
         this.popUpRefresh.classList.remove('pop-up-btn--hide');
-        this.popUpRefresh.onclick = () => this.onRetry();
         break;
 
     }

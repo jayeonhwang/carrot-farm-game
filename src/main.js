@@ -14,8 +14,10 @@ const game = new GameBuilder()
   .withBugCount(itemCount)
   .build();
 
+let lastReason = null;
 
 game.setGameStopListener(reason => {
+  lastReason = reason;
   switch (reason) {
     case Reason.cancel:
       sound.playAlert();
@@ -34,13 +36,12 @@ game.setGameStopListener(reason => {
 
 
 gameFinishBanner.setClickListener(() => {
-  if (Reason.win) {
-    itemCount++;
-    game.start();
+  if (lastReason === Reason.win) {
+    game.nextLevel();
   } else {
-    itemCount = 5;
-    game.start();
+    game.resetGame();
   }
+  game.start();
 });
 
 
