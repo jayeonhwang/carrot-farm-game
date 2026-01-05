@@ -93,6 +93,7 @@ class Game {
   }
 
   start() {
+    this.gameField.setClickListener(this.onItemClick);
     this.started = true;
     this.initGame();
     this.showStopBtn();
@@ -103,6 +104,7 @@ class Game {
 
   stop(reason) {
     this.started = false;
+    this.gameField.setClickListener(null);
     this.stopGameTimer();
     this.hideGameButton();
     sound.stopBGM();
