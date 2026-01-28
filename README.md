@@ -21,9 +21,9 @@ The game ends when the player clicks a bug or when the time runs out.
 
 ### Screenshots
 
-<img src="./img/screenshot-game.png" width = "350">
-<img src="./img/screenshot-levelup.png" width = "350">
-<img src="./img/screenshot-popup.png" width = "350">
+<img src="./img/Screenshot-game.png" width = "350">
+<img src="./img/Screenshot-levelup.png" width = "350">
+<img src="./img/Screenshot-popup.png" width = "350">
 
 ### Tech Stack
 
